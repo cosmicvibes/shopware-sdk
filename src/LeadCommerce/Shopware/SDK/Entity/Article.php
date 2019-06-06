@@ -684,18 +684,18 @@ class Article extends Base
     }
 
 
-    /**
-     * @return array
-     */
-    public function getArrayCopy()
-    {
-        $arrayCopy = parent::getArrayCopy();
-        if (!empty($arrayCopy['taxId'])) {
-            $arrayCopy['tax'] = $arrayCopy['taxId'];
-            unset($arrayCopy['taxId']);
-        }
-        return $arrayCopy;
-    }
+//    /**
+//     * @return array
+//     */
+//    public function getArrayCopy()
+//    {
+//        $arrayCopy = parent::getArrayCopy();
+//        if (!empty($arrayCopy['taxId'])) {
+//            $arrayCopy['tax'] = $arrayCopy['taxId'];
+//            unset($arrayCopy['taxId']);
+//        }
+//        return $arrayCopy;
+//    }
 
 
     public function setEntityAttributes(array $attributes)
