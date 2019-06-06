@@ -698,4 +698,32 @@ class Article extends Base
     }
 
 
+    public function setEntityAttributes(array $attributes)
+    {
+        foreach ($attributes as $attribute => $value) {
+            $setter = 'set' . ucfirst($attribute);
+
+            if($setter == 'setMainDetail' && is_array($value)) {
+                $this->handleArticleDetail($value);
+            }
+            else if (method_exists($this, $setter)) {
+                $this->$setter($value);
+            }
+        }
+
+        return $this;
+    }
+
+    private function handleArticleDetail($attributes) {
+        $detail = new ArticleDetail();
+        foreach ($attributes as $attribute => $value) {
+            $setter = 'set' . ucfirst($attribute);
+            if (method_exists($detail, $setter)) {
+                $detail->$setter($value);
+            }
+        }
+        $detail->setArticleId($this->getId());
+        $this->setMainDetail($detail);
+    }
+
 }
